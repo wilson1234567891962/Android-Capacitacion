@@ -1,31 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editText"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"></EditText>
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_below="@id/editText"></EditText>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></ImageView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Ingresar"
-        tools:text="Prueba"
-        android:layout_below="@id/editText2">
-    </Button>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="94dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView"
+            android:text="Control de Rutas"
+            android:gravity="center"
+            android:textSize="30dp"></TextView>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/textViewUsuario"
+            android:layout_width="match_parent"
+            android:layout_marginTop="22dp"
+            android:layout_height="wrap_content"
+            android:text="Usuario:"
+            android:gravity="left"
+            android:textSize="12dp"
+            android:layout_below="@id/textView"></TextView>
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/textViewUsuario"></EditText>
+
+        <TextView
+            android:id="@+id/textViewPass"
+            android:layout_width="match_parent"
+            android:layout_marginTop="22dp"
+            android:layout_height="wrap_content"
+            android:text="Password:"
+            android:gravity="left"
+            android:textSize="12dp"
+            android:layout_below="@id/editText"></TextView>
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/textViewPass"></EditText>
+
+        <Button
+            android:id="@+id/buttonIng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Ingresar"
+            android:layout_below="@id/editText2">
+        </Button>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Olvidó su contraseña?"
+            android:gravity="center"
+            android:textSize="12dp"
+            android:layout_below="@id/buttonIng"></TextView>
+
+    </LinearLayout>
+</ScrollView>
