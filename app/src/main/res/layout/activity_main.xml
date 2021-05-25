@@ -82,6 +82,7 @@
 
 
         <Button
+            android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
@@ -91,6 +92,8 @@
             android:text="Ingresar"
             app:rippleColor="#2C3E9F"
             android:layout_gravity="center">
+
+
 
         </Button>
 
