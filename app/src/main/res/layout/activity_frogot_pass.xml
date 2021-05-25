@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+
+
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ejemplo"
+
+            >
+
+
+        </ImageView>
+
+        <TextView
+
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Control de Rutas"
+            android:textColor="#000000"
+            android:textSize="30dp" />
+
+        <TextView
+
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:text="Ingrese su Correo electronico y le enviaremos un vinculo para cambiar su contrasñea"
+            android:textSize="8dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coreo Electronico"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="#000000"
+
+            />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            >
+
+        </EditText>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="100dp"
+            android:background="#3F51B5"
+            android:text="Solicitar una contraseña"
+            app:rippleColor="#2C3E9F"
+            android:layout_gravity="center">
+
+
+
+        </Button>
+
+
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:longClickable="true"
+            android:text="Regresar al inicio de la sesion"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+</ScrollView>
+
+
+
+
+
+
