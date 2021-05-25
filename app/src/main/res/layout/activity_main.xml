@@ -6,25 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </androidx.appcompat.widget.AppCompatImageView>
+    <TextView
+        android:id="@+id/lblControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Control de rutas"
+        android:layout_marginTop="56dp"
+        android:layout_below="@+id/img"></TextView>
+    <TextView
         android:id="@+id/lblUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="User"
-        android:layout_marginTop="56dp"
-        ></EditText>
+        android:hint="Usuario"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/lblControl"></TextView>
     <EditText
+        android:id="@+id/txtUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/lblUser"
+        ></EditText>
+    <TextView
         android:id="@+id/lblPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Pass"
-        android:layout_marginTop="56dp"
-        android:layout_below="@+id/lblUser"></EditText>
+        android:hint="Contraseña"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txtUser"></TextView>
+    <EditText
+        android:id="@+id/txtPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/lblPass"></EditText>
     <Button
+        android:id="@+id/btIngresar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:hint="Button"
-        android:layout_below="@+id/lblPass"></Button>
+        android:hint="Ingresar"
+        android:layout_below="@+id/txtPass"></Button>
+    <TextView
+        android:id="@+id/lblolvido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Olvido su contraseña"
+        android:layout_below="@+id/btIngresar"
+        >
+    </TextView>
 
 </RelativeLayout>
