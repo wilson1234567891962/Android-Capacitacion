@@ -74,10 +74,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Ingresar"
+
             android:layout_below="@id/editText2">
         </Button>
 
         <TextView
+            android:id="@+id/textOlvido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
