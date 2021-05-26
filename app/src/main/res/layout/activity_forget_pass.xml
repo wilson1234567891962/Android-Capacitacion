@@ -32,35 +32,30 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textUsuario"
+            android:id="@+id/texto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Usuario"
-            android:textColor="#303F9F"
-            android:textSize="20dp" />
+            android:text="Ingrese su correo electrónico y le enviaremos un vínculo para cambiar su contraseña."
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="15dp" />
 
-        <EditText
-            android:id="@+id/user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Usuario" />
 
         <TextView
             android:id="@+id/textPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Contraseña"
-            android:textColor="#303F9F"
+            android:text="Correo Electrónico"
+            android:textColor="@color/blue"
             android:textSize="20dp" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:password="true" />
+            />
 
         <Button
             android:id="@+id/ingresar"
@@ -69,19 +64,19 @@
             android:layout_gravity="center"
             android:layout_marginVertical="20dp"
 
-            android:background="#303F9F"
-            android:hint="Ingresar"
+            android:background="@color/blue"
+            android:hint=" Solicitar nueva contraseña "
             android:textColorHint="#E8D1D9"
             app:strokeColor="#9C1818" />
 
         <TextView
-            android:id="@+id/forget"
+            android:id="@+id/home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:hint="¿Olvidó la contraseña?"
+            android:hint="Regresar al inicio de la sesión"
             android:textAlignment="center"
-            android:textColor="#3F51B5"
+            android:textColor="@color/orange"
             android:textColorHint="#F57C00"
             android:textSize="18dp" />
 
