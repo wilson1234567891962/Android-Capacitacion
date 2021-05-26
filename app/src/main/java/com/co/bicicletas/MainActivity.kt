@@ -12,26 +12,27 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var usuario:EditText
-    lateinit var contraseña:EditText
-    lateinit var olvidoC:TextView
-    lateinit var buttonAcc: Button
+    private lateinit var pass:EditText
+    private lateinit var olvidoC:TextView
+    private lateinit var buttonAcc: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        usuario = findViewById(R.id.editText2) as EditText
-        contraseña = findViewById(R.id.editText) as EditText
-        olvidoC = findViewById(R.id.textView3) as TextView
-        buttonAcc = findViewById(R.id.button1) as Button
+        usuario = findViewById<EditText>(R.id.editText2)
+        pass = findViewById<EditText>(R.id.editText)
+        olvidoC = findViewById<TextView>(R.id.textView3)
+        buttonAcc = findViewById<Button>(R.id.button1)
+
+        buttonAcc.setOnClickListener(::showCredentials)
 
 
-
-        buttonAcc.setOnClickListener(::resetPass);
+        olvidoC.setOnClickListener(::resetPass);
 
     }
 
-fun resetPass(p : View ) {
+private fun resetPass(p : View? ) {
     val myIntent = Intent(this, frogotPass::class.java)
 
 
@@ -39,5 +40,11 @@ fun resetPass(p : View ) {
 
 }
 
+    fun showCredentials(p : View?){
+        Toast.makeText(
+            this,  "${usuario.text} ${pass.text}" as String?,
+            Toast.LENGTH_LONG
+        ).show()
+    }
 
 }
