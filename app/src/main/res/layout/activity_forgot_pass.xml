@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/scrollolvido"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image1olvido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/bicicleta"/>
+        <TextView
+            android:id="@+id/titleolvido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/titulo_new"
+            android:layout_below="@+id/image1olvido"
+            android:textSize="30dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/labelolvido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/texto_olvido"
+            android:layout_below="@+id/titleolvido"
+            android:textSize="12dp">
+        </TextView>
+
+        <EditText
+            android:id="@+id/userolvido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:layout_below="@+id/labelolvido"
+            android:layout_marginTop="50dp"
+            />
+
+
+
+        <Button
+            android:id="@+id/buttonolvido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="100dp"
+            android:text="@string/recordar"
+            android:layout_below="@id/userolvido"
+            />
+
+        <TextView
+            android:id="@+id/link1olvido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:textSize="9dp"
+            android:text="@string/link2"
+            android:layout_below="@+id/buttonolvido"
+            android:autoLink="web"
+            android:layout_marginTop="20dp"
+            />
+    </LinearLayout>
+</ScrollView>
