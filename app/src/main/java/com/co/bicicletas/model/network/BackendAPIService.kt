@@ -2,7 +2,9 @@ package com.co.bicicletas.model.network
 
 import android.util.Log
 import com.co.bicicletas.model.entities.BodyLogin
+import com.co.bicicletas.model.entities.BodyRemember
 import com.co.bicicletas.model.entities.ResponseLogin
+import com.co.bicicletas.model.entities.ResponseRemember
 import com.co.bicicletas.utils.Constants
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
@@ -37,5 +39,9 @@ class BackendAPIService {
 
     fun doLogin(body : BodyLogin): Single<ResponseLogin> {
         return api.login(body)
+    }
+
+    fun doRemember(body: BodyRemember) : Single<ResponseRemember>{
+        return api.remember(body)
     }
 }

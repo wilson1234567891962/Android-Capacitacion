@@ -3,7 +3,9 @@ package com.co.bicicletas.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.co.bicicletas.model.entities.BodyLogin
+import com.co.bicicletas.model.entities.BodyRemember
 import com.co.bicicletas.model.entities.ResponseLogin
+import com.co.bicicletas.model.entities.ResponseRemember
 import com.co.bicicletas.model.network.BackendAPIService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -71,5 +73,8 @@ class LoginViewModel: ViewModel() {
                     })
             )
         }
+
+
+
 
 }
