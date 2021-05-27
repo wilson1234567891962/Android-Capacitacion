@@ -9,6 +9,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.viewmodel.LoginViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pass:EditText
     private lateinit var olvidoC:TextView
     private lateinit var buttonAcc: Button
+
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,8 +34,10 @@ class MainActivity : AppCompatActivity() {
         olvidoC = findViewById<TextView>(R.id.textView3)
         buttonAcc = findViewById<Button>(R.id.button1)
 
-        buttonAcc.setOnClickListener(::showCredentials)
+        buttonAcc.setOnClickListener(::login)
 
+        loginViewModel=
+            ViewModelProvider(this).get(LoginViewModel::class.java)
 
         olvidoC.setOnClickListener(::resetPass);
 
@@ -72,11 +81,20 @@ private fun resetPass(p : View? ) {
 
 }
 
-    fun showCredentials(p : View?){
-        Toast.makeText(
-            this,  "${usuario.text} ${pass.text}" as String?,
-            Toast.LENGTH_LONG
-        ).show()
+    fun login(p : View?){
+
+        loginViewModel.getLogin(LoginDTO(pass.text.toString() , usuario.text.toString()))
+        getViewModelObserver()
     }
+
+    fun getViewModelObserver(){
+
+        loginViewModel.loginResponse.observe(this) { login ->
+            login.let {
+                Log.d("login","A2")
+            }
+        }
+            }
+
 
 }
