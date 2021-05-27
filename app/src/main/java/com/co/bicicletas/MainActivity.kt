@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun login(view: View?){
+        Log.d("pass ", pass.text.toString())
+        Log.d("user ", user.text.toString())
         loginViewModel.login(BodyLogin(pass.text.toString(), user.text.toString()))
         getViewModelObserver()
     }
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         loginViewModel.loginResponse.observe(this) {
             loginResponse ->
             loginResponse.let {
-                Log.d("Token", it.data.token)
+                Toast.makeText(this, it.data.token, Toast.LENGTH_LONG)
             }
         }
 

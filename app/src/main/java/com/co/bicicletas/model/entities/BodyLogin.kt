@@ -1,4 +1,5 @@
 package com.co.bicicletas.model.entities
 
-   class BodyLogin constructor(password:String, user:String){
+   class BodyLogin (val password:String, val user:String){
+
    }
