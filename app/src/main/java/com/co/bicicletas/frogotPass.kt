@@ -22,11 +22,11 @@ class frogotPass : AppCompatActivity() {
     }
 
     fun BackHome(p : View) {
-        val myIntent = Intent(this, MainActivity::class.java)
+        //val myIntent = Intent(this, MainActivity::class.java)
 
 
-        this.startActivity(myIntent)
-
+        //this.startActivity(myIntent)
+            this.onBackPressed()
     }
 
 }
