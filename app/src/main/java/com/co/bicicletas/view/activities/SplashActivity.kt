@@ -44,7 +44,7 @@ class SplashActivity : AppCompatActivity() {
                 // "Add the code that you want to execute when animation ends")
 
                 Handler(Looper.getMainLooper()).postDelayed({
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                    startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                     finish()
                 }, 1000)
             }

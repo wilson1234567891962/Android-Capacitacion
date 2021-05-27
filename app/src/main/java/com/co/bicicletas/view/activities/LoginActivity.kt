@@ -13,7 +13,7 @@ import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.viewmodel.LoginViewModel
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     lateinit var usuario: EditText
     private lateinit var pass: EditText
     private lateinit var olvidoC: TextView
