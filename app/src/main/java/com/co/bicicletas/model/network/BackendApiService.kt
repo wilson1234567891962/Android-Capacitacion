@@ -33,7 +33,7 @@ class BackendApiService {
         // Create an implementation of the API endpoints defined by the service interface in our case it is RandomDishAPI.
         .create(BicicletasAPI::class.java)
 
-    fun doLogin(bodyLogin: LoginDTO): Single<BodyLoginResponse> {
+    fun doLogin(bodyLogin: LoginDTO): Single<BodyLoginResponse.LoginResponseDTO> {
         return api.login(bodyLogin)
     }
 }

@@ -2,7 +2,7 @@ package com.co.bicicletas.model.entities
 
 object BodyLoginResponse {
     data class LoginResponseDTO(
-    val `data`: Data
+    val data: Data
 )
 
 data class Data(

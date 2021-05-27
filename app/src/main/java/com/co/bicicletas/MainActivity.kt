@@ -47,11 +47,11 @@ class MainActivity() : AppCompatActivity() {
         }
 
 fun login(p: View?){
-  Toast.makeText(
+   /* Toast.makeText(
         this, "${textUser.text} ${textPass.text}" as String?,
 
         Toast.LENGTH_LONG
-    ).show()
+    ).show()*/
 
     loginViewModel.getLogin(LoginDTO(textPass.text.toString(),textUser.text.toString()))
     ViewModelObserver()
@@ -60,7 +60,7 @@ fun login(p: View?){
     fun ViewModelObserver(){
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
-                Log.d("Login","sss")
+                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
             }
         }
     }

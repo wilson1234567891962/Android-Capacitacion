@@ -8,6 +8,6 @@ import retrofit2.http.POST
 
 interface BicicletasAPI {
     @POST("/UMB/login/")
-    fun login(@Body body: LoginDTO) : Single<BodyLoginResponse>
+    fun login(@Body body: LoginDTO) : Single<BodyLoginResponse.LoginResponseDTO>
 
 }
