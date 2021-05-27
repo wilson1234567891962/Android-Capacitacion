@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.co.bicicletas.R
 
-class frogotPass : AppCompatActivity() {
+class ForgotActivity : AppCompatActivity() {
 
     lateinit var buttonreset: Button
     lateinit var textForgot: TextView

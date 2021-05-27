@@ -8,9 +8,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.utils.extensiones.hideLoader
+import com.co.bicicletas.utils.extensiones.showLoader
 import com.co.bicicletas.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -66,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun resetPass(p: View?) {
-        val myIntent = Intent(this, frogotPass::class.java)
+        val myIntent = Intent(this, ForgotActivity::class.java)
 
 
         this.startActivity(myIntent)
@@ -74,9 +77,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(view: View?) {
-
-        val myIntent = Intent(this, HomeActivity::class.java)
-        this.startActivity(myIntent)
+        loginViewModel.getLogin(LoginDTO(pass.text.toString(), usuario.text.toString()))
+        getViewModelObserver()
     }
 
     private fun getViewModelObserver() {
@@ -86,5 +88,16 @@ class LoginActivity : AppCompatActivity() {
                 this.startActivity(myIntent)
             }
         }
+
+        loginViewModel.loaderShowOrNot.observe(this, Observer { loader ->
+            loader?.let {
+                // Show the progress dialog if the SwipeRefreshLayout is not visible and hide when the usage is completed.
+                if (loader) {
+                   this.showLoader()
+                } else {
+                    this.hideLoader()
+                }
+            }
+        })
     }
 }

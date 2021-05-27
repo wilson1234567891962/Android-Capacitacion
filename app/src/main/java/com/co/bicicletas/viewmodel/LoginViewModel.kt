@@ -24,14 +24,14 @@ class LoginViewModel : ViewModel() {
      * Creates a MutableLiveData with no value assigned to it.
      */
 
-    val loadRandomDish = MutableLiveData<Boolean>()
+    val loaderShowOrNot = MutableLiveData<Boolean>()
     val loginResponse = MutableLiveData<BodyLoginResponse.LoginResponseDTO>()
     val randomDishLoadingError = MutableLiveData<Boolean>()
 
 
     fun getLogin( body : LoginDTO) {
         // Define the value of the load random dish.
-        loadRandomDish.value = true
+        loaderShowOrNot.value = true
         // Adds a Disposable to this container or disposes it if the container has been disposed.
         compositeDisposable.add(
             // Call the RandomDish method of RandomDishApiService class.
@@ -59,14 +59,14 @@ class LoginViewModel : ViewModel() {
                 .subscribeWith(object : DisposableSingleObserver<BodyLoginResponse.LoginResponseDTO>() {
                     override fun onSuccess(value: BodyLoginResponse.LoginResponseDTO?) {
                         // Update the values with response in the success method.
-                        loadRandomDish.value = false
+                        loaderShowOrNot.value = false
                         loginResponse.value = value
                         randomDishLoadingError.value = false
                     }
 
                     override fun onError(e: Throwable?) {
                         // Update the values in the response in the error method
-                        loadRandomDish.value = false
+                        loaderShowOrNot.value = false
                         randomDishLoadingError.value = true
                     }
                 })
