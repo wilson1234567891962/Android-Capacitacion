@@ -75,8 +75,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login(view: View?) {
 
-        loginViewModel.getLogin(LoginDTO(pass.text.toString(), usuario.text.toString()))
-        getViewModelObserver()
+        val myIntent = Intent(this, HomeActivity::class.java)
+        this.startActivity(myIntent)
     }
 
     private fun getViewModelObserver() {
