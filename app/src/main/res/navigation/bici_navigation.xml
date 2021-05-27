@@ -12,13 +12,13 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_collector"
         android:name="com.co.bicicletas.view.fragments.CollectorFragment"
         android:label="@string/title_collector"
         tools:layout="@layout/fragment_collector" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_artist"
         android:name="com.co.bicicletas.view.fragments.ArtistFragment"
         android:label="@string/title_artist"
         tools:layout="@layout/fragment_artist" />
