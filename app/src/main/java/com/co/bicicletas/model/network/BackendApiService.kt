@@ -4,9 +4,12 @@ import com.co.bicicletas.model.entities.BodyLoginResponse
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.utils.Constants
 import io.reactivex.rxjava3.core.Single
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 class BackendApiService {
@@ -21,6 +24,7 @@ class BackendApiService {
          * all types.
          */
         .addConverterFactory(GsonConverterFactory.create())
+        .client(generateOkHttpClient())
         /**
          * **
          * Add a call adapter factory for supporting service method return types other than.
@@ -35,7 +39,19 @@ class BackendApiService {
         // Create an implementation of the API endpoints defined by the service interface in our case it is RandomDishAPI.
         .create(BicicletasApis::class.java)
 
-    fun doLogin(bodyLogin : LoginDTO ) :
+    private fun generateOkHttpClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
+            .build()
+    }
+
+
+    fun doLogin(bodyLogin: LoginDTO) :
          Single<BodyLoginResponse.LoginResponseDTO> {
         return api.login(bodyLogin)
     }
