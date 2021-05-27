@@ -25,7 +25,7 @@ class LoginViewModel : ViewModel() {
      */
 
     val loadRandomDish = MutableLiveData<Boolean>()
-    val loginResponse = MutableLiveData<BodyLoginResponse>()
+    val loginResponse = MutableLiveData<BodyLoginResponse.LoginResponseDTO>()
     val randomDishLoadingError = MutableLiveData<Boolean>()
 
 
@@ -56,8 +56,8 @@ class LoginViewModel : ViewModel() {
                  * Subscribes a given SingleObserver (subclass) to this Single and returns the given
                  * SingleObserver as is.
                  */
-                .subscribeWith(object : DisposableSingleObserver<BodyLoginResponse>() {
-                    override fun onSuccess(value: BodyLoginResponse?) {
+                .subscribeWith(object : DisposableSingleObserver<BodyLoginResponse.LoginResponseDTO>() {
+                    override fun onSuccess(value: BodyLoginResponse.LoginResponseDTO?) {
                         // Update the values with response in the success method.
                         loadRandomDish.value = false
                         loginResponse.value = value

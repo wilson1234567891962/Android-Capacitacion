@@ -11,7 +11,7 @@ interface BicicletasApis {
 
 
     @POST("UMB/login/")
-    fun login(@Body loginBody : LoginDTO  ) : Single<BodyLoginResponse>
+    fun login(@Body loginBody : LoginDTO  ) : Single<BodyLoginResponse.LoginResponseDTO>
 
 
 

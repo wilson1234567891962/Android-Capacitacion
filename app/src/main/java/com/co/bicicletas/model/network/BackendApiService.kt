@@ -36,7 +36,7 @@ class BackendApiService {
         .create(BicicletasApis::class.java)
 
     fun doLogin(bodyLogin : LoginDTO ) :
-         Single<BodyLoginResponse> {
+         Single<BodyLoginResponse.LoginResponseDTO> {
         return api.login(bodyLogin)
     }
 
