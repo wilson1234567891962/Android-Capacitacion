@@ -82,7 +82,8 @@ class LoginActivity : AppCompatActivity() {
     private fun getViewModelObserver() {
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
-                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+                val myIntent = Intent(this, HomeActivity::class.java)
+                this.startActivity(myIntent)
             }
         }
     }

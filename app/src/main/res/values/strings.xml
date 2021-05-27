@@ -2,4 +2,7 @@
     <string name="app_name">Bicicletas</string>
 
     <string name="splash_screen_title">Bicicletas</string>
+    <string name="title_home">Album</string>
+    <string name="title_collector">Coleccionista</string>
+    <string name="title_artist">Artista</string>
 </resources>
