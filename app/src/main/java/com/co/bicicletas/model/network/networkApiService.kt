@@ -2,6 +2,8 @@ package com.co.bicicletas.model.network
 
 import com.co.bicicletas.model.entities.BodyResponse
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.forgotPassRQ
+import com.co.bicicletas.model.entities.forgotPassRS
 import com.co.bicicletas.utils.Constants
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
@@ -37,4 +39,9 @@ class networkApiService {
     fun doLogin(body:LoginDTO):Single<BodyResponse.LoginResponseDTO>{
             return api.login(body)
         }
+
+    fun doForgot(body:forgotPassRQ):Single<forgotPassRS>{
+        return api.forgot(body)
+    }
+
     }
