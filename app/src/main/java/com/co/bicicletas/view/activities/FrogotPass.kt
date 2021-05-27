@@ -1,9 +1,10 @@
-package com.co.bicicletas
+package com.co.bicicletas.view.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.co.bicicletas.R
 
 class frogotPass : AppCompatActivity() {
 
