@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showData(p:View){
-        Toast.makeText(this,"Usuario: ${etUser.text} \n Contraseña: ${etPass.text}",Toast.LENGTH_LONG).show()
+        //Toast.makeText(this,"Usuario: ${etUser.text} \n Contraseña: ${etPass.text}",Toast.LENGTH_LONG).show()
 
         loginVM.getLogin(LoginDTO(password =etPass.text.toString() ,user = etUser.text.toString()))
         getViewModelObserver()
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     fun getViewModelObserver(){
         loginVM.loginResponse.observe(this){
         login -> login.let {
-            Log.d("Login Succes","A2")
+            Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
         }
 }
 

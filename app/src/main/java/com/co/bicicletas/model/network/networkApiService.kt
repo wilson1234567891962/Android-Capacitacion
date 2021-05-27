@@ -34,7 +34,7 @@ class networkApiService {
         // Create an implementation of the API endpoints defined by the service interface in our case it is RandomDishAPI.
         .create(BiclicateAPIs::class.java)
 
-    fun doLogin(body:LoginDTO):Single<BodyResponse>{
+    fun doLogin(body:LoginDTO):Single<BodyResponse.LoginResponseDTO>{
             return api.login(body)
         }
     }

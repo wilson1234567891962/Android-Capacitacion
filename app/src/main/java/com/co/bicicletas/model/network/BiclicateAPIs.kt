@@ -6,8 +6,8 @@ import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-abstract class BiclicateAPIs {
+interface BiclicateAPIs {
 
     @POST("UMB/login/")
-    fun login(@Body b:LoginDTO): Single<BodyResponse>
+    fun login(@Body loginBody: LoginDTO): Single<BodyResponse.LoginResponseDTO>
 }
