@@ -9,5 +9,5 @@ import retrofit2.http.POST
 abstract class BiclicateAPIs {
 
     @POST("UMB/login/")
-    abstract fun login(@Body b:LoginDTO): Single<BodyResponse>
+    fun login(@Body b:LoginDTO): Single<BodyResponse>
 }

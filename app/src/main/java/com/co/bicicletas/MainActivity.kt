@@ -2,12 +2,17 @@ package com.co.bicicletas
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.viewModel.LoginViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var etPass : EditText
     lateinit var forgotP : TextView
     lateinit var login : Button
+    lateinit var loginVM:LoginViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         login.setOnClickListener(::showData)
 
-
+        loginVM=
+            ViewModelProvider(this).get(LoginViewModel::class.java)
 
         }
 
@@ -49,5 +57,17 @@ class MainActivity : AppCompatActivity() {
 
     fun showData(p:View){
         Toast.makeText(this,"Usuario: ${etUser.text} \n Contraseña: ${etPass.text}",Toast.LENGTH_LONG).show()
+
+        loginVM.getLogin(LoginDTO(password =etPass.text.toString() ,user = etUser.text.toString()))
+        getViewModelObserver()
+    }
+
+    fun getViewModelObserver(){
+        loginVM.loginResponse.observe(this){
+        login -> login.let {
+            Log.d("Login Succes","A2")
+        }
+}
+
     }
 }

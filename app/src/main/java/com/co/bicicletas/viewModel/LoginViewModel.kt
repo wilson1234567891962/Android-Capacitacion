@@ -23,7 +23,7 @@ class LoginViewModel: ViewModel() {
      * Creates a MutableLiveData with no value assigned to it.
      */
     val loadRandomDish = MutableLiveData<Boolean>()
-    val randomDishResponse = MutableLiveData<BodyResponse>()
+    val loginResponse = MutableLiveData<BodyResponse>()
     val randomDishLoadingError = MutableLiveData<Boolean>()
 
     fun getLogin(body:LoginDTO) {
@@ -57,7 +57,7 @@ class LoginViewModel: ViewModel() {
                     override fun onSuccess(value: BodyResponse?) {
                         // Update the values with response in the success method.
                         loadRandomDish.value = false
-                        randomDishResponse.value = value
+                        loginResponse.value = value
                         randomDishLoadingError.value = false
                     }
                     override fun onError(e: Throwable?) {
