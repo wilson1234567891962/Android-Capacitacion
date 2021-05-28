@@ -13,7 +13,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.PassDTO
 import com.co.bicicletas.viewmodel.LoginViewModel
+import com.co.bicicletas.viewmodel.PassViewModel
 
 
 class MainActivity() : AppCompatActivity() {
@@ -23,6 +25,7 @@ class MainActivity() : AppCompatActivity() {
     lateinit var TextForget:TextView
 
     private lateinit var loginViewModel:LoginViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +43,12 @@ class MainActivity() : AppCompatActivity() {
 
     }
 
-        fun resetPass(p: View?) {
-            val myIntent = Intent(this, forgetPass::class.java)
-            this.startActivity(myIntent)
+    fun resetPass(p: View?) {
+        val myIntent = Intent(this, forgetPass::class.java)
+        this.startActivity(myIntent)
 
-        }
+
+    }
 
 fun login(p: View?){
    /* Toast.makeText(
