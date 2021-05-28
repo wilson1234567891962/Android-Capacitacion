@@ -1,4 +1,4 @@
-package com.co.bicicletas
+package com.co.bicicletas.view.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.PassDTO
-import com.co.bicicletas.viewmodel.LoginViewModel
 import com.co.bicicletas.viewmodel.PassViewModel
 
 class forgetPass : AppCompatActivity() {

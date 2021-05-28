@@ -3,6 +3,7 @@
     package="com.co.bicicletas">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,17 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bicicletas"
         android:usesCleartextTraffic="true">
-        <activity android:name=".forgetPass"></activity>
-        <activity android:name=".MainActivity"
-
-            >
+        <activity
+            android:name=".view.activities.SplashActivity"
+            android:theme="@style/Theme.Bicicletas.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".view.activities.forgetPass" />
+        <activity android:name=".view.activities.MainActivity">
+
+        </activity>
     </application>
 
 </manifest>
