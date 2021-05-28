@@ -1,6 +1,5 @@
-package com.co.bicicletas
+package com.co.bicicletas.view.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,10 +8,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.ForgotDTO
-import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.viewmodel.ForgotViewModel
-import com.co.bicicletas.viewmodel.LoginViewModel
 
 class frogotPass : AppCompatActivity() {
 

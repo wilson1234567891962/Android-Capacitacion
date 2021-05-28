@@ -1,4 +1,4 @@
-package com.co.bicicletas
+package com.co.bicicletas.view.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.viewmodel.LoginViewModel
 
