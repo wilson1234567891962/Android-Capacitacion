@@ -91,7 +91,8 @@ private fun resetPass(p : View? ) {
 
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
-                Log.d("login","A2")
+                //Log.d("login","A2")
+                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
             }
         }
             }

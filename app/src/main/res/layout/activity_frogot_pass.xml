@@ -61,7 +61,7 @@
             />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editText6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -72,7 +72,7 @@
         </EditText>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"

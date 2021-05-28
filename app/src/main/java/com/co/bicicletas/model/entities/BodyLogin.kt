@@ -5,3 +5,4 @@ package com.co.bicicletas.model.entities
     val password: String,
     val user: String
 )
+
