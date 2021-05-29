@@ -1,17 +1,18 @@
-package com.co.bicicletas
+package com.co.bicicletas.view.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.view.activities.R
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.utils.extensiones.hideLoader
+import com.co.bicicletas.utils.extensiones.showLoader
 import com.co.bicicletas.viewModel.LoginViewModel
 
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var etPass : EditText
     lateinit var forgotP : TextView
     lateinit var login : Button
-    lateinit var loginVM:LoginViewModel
+    lateinit var loginVM: LoginViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showData(p:View){
         //Toast.makeText(this,"Usuario: ${etUser.text} \n Contraseña: ${etPass.text}",Toast.LENGTH_LONG).show()
-
+        this.showLoader()
         loginVM.getLogin(LoginDTO(password =etPass.text.toString() ,user = etUser.text.toString()))
         getViewModelObserver()
     }
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         loginVM.loginResponse.observe(this){
         login -> login.let {
             Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+            this.hideLoader()
         }
 }
 

@@ -1,4 +1,4 @@
-package com.co.bicicletas
+package com.co.bicicletas.view.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,17 +7,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.co.bicicletas.databinding.ActivityForgotPassBinding
-import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.model.entities.forgotPassRQ
-import com.co.bicicletas.viewModel.LoginViewModel
+import com.co.bicicletas.view.activities.databinding.ActivityForgotPassBinding
 import com.co.bicicletas.viewModel.forgotViewModel
 
 class forgotPass : AppCompatActivity() {
@@ -28,7 +22,7 @@ class forgotPass : AppCompatActivity() {
     lateinit var etMail : EditText
     lateinit var boton : Button
 
-    lateinit var forgotVM:forgotViewModel
+    lateinit var forgotVM: forgotViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
