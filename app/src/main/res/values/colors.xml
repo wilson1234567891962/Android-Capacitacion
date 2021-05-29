@@ -8,8 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#F57C00</color>
-    <color name="blue">#303F9F</color>
+    <color name="blue">#06146E</color>
     <color name="green">#63D61B</color>
+    <color name="black_opacity_50">#80000000</color>
+    <color name="black_opacity_70">#B3000000</color>
+    <color name="opacity_50">#80FFFFFF</color>
+    <color name="grey_900">#212121</color>
 
 
 

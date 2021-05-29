@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:foregroundTint="#712222"
     android:paddingLeft="50dp"
-    android:paddingRight="50dp">
+    android:paddingRight="50dp"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,6 +45,7 @@
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue"
             android:hint="Usuario" />
 
         <TextView
@@ -60,7 +62,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
-            android:password="true" />
+            android:password="true"
+            android:singleLine="true"
+            android:textColor="@color/blue" />
 
         <Button
             android:id="@+id/ingresar"
@@ -68,11 +72,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginVertical="20dp"
-
-            android:background="#303F9F"
+            android:background="@color/blue"
+            android:backgroundTint="@color/blue"
             android:hint="Ingresar"
-            android:textColorHint="#E8D1D9"
-            app:strokeColor="#9C1818" />
+            android:textColorHint="#FBC02D" />
 
         <TextView
             android:id="@+id/forget"

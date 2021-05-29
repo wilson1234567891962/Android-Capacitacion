@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.utils.extensions.hideLoader
+import com.co.bicicletas.utils.extensions.showLoader
 import com.co.bicicletas.viewmodel.LoginViewModel
 
 
@@ -52,7 +54,7 @@ fun login(p: View?){
 
         Toast.LENGTH_LONG
     ).show()*/
-
+    this.showLoader()
     loginViewModel.getLogin(LoginDTO(textPass.text.toString(),textUser.text.toString()))
     ViewModelObserver()
 
@@ -61,6 +63,7 @@ fun login(p: View?){
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
                 Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+                this.hideLoader()
             }
         }
     }
