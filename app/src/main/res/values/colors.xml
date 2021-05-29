@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#63D61B</color>
     <color name="primary_dark_color">#FFBB86FC</color>
+    <color name="black_opacity_50">#80000000</color>
+    <color name="black_opacity_70">#B3000000</color>
+    <color name="opacity_50">#80FFFFFF</color>
+    <color name="branco">@android:color/white</color>
+    <color name="grey_900">#212121</color>
+
 </resources>

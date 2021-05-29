@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.viewmodel.LoginViewModel
+import hideLoader
+import showLoader
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             ViewModelProvider(this).get(LoginViewModel::class.java)
 
         olvidoC.setOnClickListener(::resetPass);
+
 
     }
 
@@ -81,9 +84,10 @@ private fun resetPass(p : View? ) {
 }
 
     fun login(p : View?){
-
+    this.showLoader()
         loginViewModel.getLogin(LoginDTO(pass.text.toString() , usuario.text.toString()))
         getViewModelObserver()
+
     }
 
     fun getViewModelObserver(){
@@ -92,6 +96,7 @@ private fun resetPass(p : View? ) {
             login.let {
                 //Log.d("login","A2")
                 Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+                this.hideLoader()
             }
         }
             }
