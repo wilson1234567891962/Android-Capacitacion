@@ -3,6 +3,7 @@ package com.co.bicicletas.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.co.bicicletas.model.entities.BodyLoginResponse
+import com.co.bicicletas.model.entities.ForgotDTO
 import com.co.bicicletas.model.entities.ForgotResponseDTO
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.model.network.BackendApiService
@@ -11,7 +12,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class LoginViewModel : ViewModel() {
+class ForgotViewModel : ViewModel(){
+
 
     private val backendApiService = BackendApiService()
 
@@ -26,18 +28,18 @@ class LoginViewModel : ViewModel() {
      */
 
     val loadRandomDish = MutableLiveData<Boolean>()
-    val loginResponse = MutableLiveData<BodyLoginResponse.LoginResponseDTO>()
+    val forgotResponse = MutableLiveData<ForgotResponseDTO>()
 
     val randomDishLoadingError = MutableLiveData<Boolean>()
 
 
-    fun getLogin( body : LoginDTO) {
+    fun getForgot( body : ForgotDTO) {
         // Define the value of the load random dish.
         loadRandomDish.value = true
         // Adds a Disposable to this container or disposes it if the container has been disposed.
         compositeDisposable.add(
             // Call the RandomDish method of RandomDishApiService class.
-            backendApiService.doLogin(body)
+            backendApiService.doForgot(body)
                 // Asynchronously subscribes SingleObserver to this Single on the specified Scheduler.
                 /**
                  * Static factory methods for returning standard Scheduler instances.
@@ -58,11 +60,11 @@ class LoginViewModel : ViewModel() {
                  * Subscribes a given SingleObserver (subclass) to this Single and returns the given
                  * SingleObserver as is.
                  */
-                .subscribeWith(object : DisposableSingleObserver<BodyLoginResponse.LoginResponseDTO>() {
-                    override fun onSuccess(value: BodyLoginResponse.LoginResponseDTO?) {
+                .subscribeWith(object : DisposableSingleObserver<ForgotResponseDTO>() {
+                    override fun onSuccess(value: ForgotResponseDTO?) {
                         // Update the values with response in the success method.
                         loadRandomDish.value = false
-                        loginResponse.value = value
+                        forgotResponse.value = value
                         randomDishLoadingError.value = false
                     }
 
@@ -74,6 +76,8 @@ class LoginViewModel : ViewModel() {
                 })
         )
     }
+
+
 
 
 

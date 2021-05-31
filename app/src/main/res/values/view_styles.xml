@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ProgressBar -->
+    <style name="ProgressBar.Horizontal" parent="android:Widget.Material.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:minHeight">@dimen/progress_horizontal_height</item>
+    </style>
+    <style name="ProgressBar.Circular" parent="android:Widget.Material.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_circular</item>
+    </style>
+</resources>

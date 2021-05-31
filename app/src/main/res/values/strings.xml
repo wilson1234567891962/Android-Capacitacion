@@ -1,12 +1,5 @@
 <resources>
-    <string name="app_name">Control de Rutas</string>
-    <string name="pass">Password</string>
-    <string name="user">User</string>
-    <string name="registrar">Log in</string>
-    <string name="titulo_new">Control de Rutas</string>
-    <string name="link"><a href="google.com">olvidó su contraseña</a></string>
-    <string name="texto_olvido">Desea recuperar su contraseña, favor ingrese el email</string>
-    <string name="email">Email</string>
-    <string name="recordar">Recuperar Contraseña</string>
-    <string name="link2">Volver</string>
+    <string name="app_name">Bicicletas</string>
+    <string name="splash_screen_title">Bicicletas</string>
+
 </resources>
