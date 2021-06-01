@@ -62,11 +62,17 @@ fun login(p: View?){
     fun ViewModelObserver(){
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
-                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
                 this.hideLoader()
+                val myIntent = Intent(this, HomeActivity::class.java)
+                this.startActivity(myIntent)
             }
         }
+
     }
+
+
+
 
 }
 

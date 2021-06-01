@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bicicletas"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.activities.HomeActivity"></activity>
         <activity
             android:name=".view.activities.SplashActivity"
             android:theme="@style/Theme.Bicicletas.NoActionBar">
@@ -20,14 +21,10 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
         </activity>
         <activity android:name=".view.activities.forgetPass" />
-        <activity android:name=".view.activities.MainActivity">
-
-        </activity>
+        <activity android:name=".view.activities.MainActivity"></activity>
     </application>
 
 </manifest>
