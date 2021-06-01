@@ -2,6 +2,6 @@ package com.co.bicicletas.utils
 
 object Constants {
 
-    const val BASE_URL = "http://192.168.0.22:9021/"
+    const val BASE_URL = "https://rutas-umb.herokuapp.com/"
 
 }
