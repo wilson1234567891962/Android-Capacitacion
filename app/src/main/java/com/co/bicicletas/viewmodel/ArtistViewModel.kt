@@ -2,17 +2,17 @@ package com.co.bicicletas.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.co.bicicletas.model.entities.BodyRemember
-import com.co.bicicletas.model.entities.ResponseRemember
-import com.co.bicicletas.model.network.BackendAPIService
+import com.co.bicicletas.model.entities.ForgotDTO
+import com.co.bicicletas.model.entities.ForgotResponseDTO
+import com.co.bicicletas.model.network.BackendApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class RememberViewModel : ViewModel(){
+class ArtistViewModel : ViewModel(){
 
-    val service = BackendAPIService()
+    private val backendApiService = BackendApiService()
 
     /**
      * A disposable container that can hold onto multiple other Disposables and
@@ -20,20 +20,23 @@ class RememberViewModel : ViewModel(){
      * operations.
      */
     private val compositeDisposable = CompositeDisposable()
+    /**
+     * Creates a MutableLiveData with no value assigned to it.
+     */
+
+    val loadRandomDish = MutableLiveData<Boolean>()
+    val forgotResponse = MutableLiveData<ForgotResponseDTO>()
+
+    val randomDishLoadingError = MutableLiveData<Boolean>()
 
 
-    val loadRemember = MutableLiveData<Boolean>()
-    val rememberResponse = MutableLiveData<ResponseRemember>()
-    val rememberLoadingError = MutableLiveData<Boolean>()
-
-    fun remember(body: BodyRemember){
-
+    fun getForgot( body : ForgotDTO) {
         // Define the value of the load random dish.
-        loadRemember.value = true
+        loadRandomDish.value = true
         // Adds a Disposable to this container or disposes it if the container has been disposed.
         compositeDisposable.add(
             // Call the RandomDish method of RandomDishApiService class.
-            service.doRemember(body)
+            backendApiService.doForgot(body)
                 // Asynchronously subscribes SingleObserver to this Single on the specified Scheduler.
                 /**
                  * Static factory methods for returning standard Scheduler instances.
@@ -54,19 +57,21 @@ class RememberViewModel : ViewModel(){
                  * Subscribes a given SingleObserver (subclass) to this Single and returns the given
                  * SingleObserver as is.
                  */
-                .subscribeWith(object : DisposableSingleObserver<ResponseRemember>() {
-                    override fun onSuccess(value: ResponseRemember?) {
+                .subscribeWith(object : DisposableSingleObserver<ForgotResponseDTO>() {
+                    override fun onSuccess(value: ForgotResponseDTO?) {
                         // Update the values with response in the success method.
-                        loadRemember.value = false
-                        rememberResponse.value = value
-                        rememberLoadingError.value = false
+                        loadRandomDish.value = false
+                        forgotResponse.value = value
+                        randomDishLoadingError.value = false
                     }
+
                     override fun onError(e: Throwable?) {
                         // Update the values in the response in the error method
-                        loadRemember.value = false
-                        rememberLoadingError.value = true
+                        loadRandomDish.value = false
+                        randomDishLoadingError.value = true
                     }
                 })
         )
     }
+
 }

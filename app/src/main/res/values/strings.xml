@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Bicicletas</string>
     <string name="splash_screen_title">Bicicletas</string>
+    <string name="title_collector">Collector</string>
+    <string name="title_artist">Artista</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Búsqueda</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
@@ -95,11 +96,27 @@ private fun resetPass(p : View? ) {
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
                 //Log.d("login","A2")
-                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
                 this.hideLoader()
+                val myIntent = Intent(this, HomeActivity::class.java)
+                this.startActivity(myIntent)
             }
         }
+
+        /*loginViewModel.loadRandomDish.observe(this, Observer { loader ->
+            loader?.let {
+                // Show the progress dialog if the SwipeRefreshLayout is not visible and hide when the usage is completed.
+                if (loader) {
+                    this.showLoader()
+                } else {
+                    this.hideLoader()
+                }
             }
+        })*/
+    }
+
+
+
 
 
 }
