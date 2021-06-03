@@ -22,12 +22,13 @@ class LoginRepository(private val LoginDao:LoginDao) {
         LoginDao.deleteUser(login)
     }
 
-/*
-    @WorkerThread
-    suspend fun getAllUser(): Flow<List<LoginDatabase>>{
+
+    // Room executes all queries on a separate thread.
+    // Observed Flow will notify the observer when the data has changed.
+    fun getAllUser(): Flow<List<LoginDatabase>>{
         return LoginDao.getAllUser()
     }
-*/
+
 
 
 }

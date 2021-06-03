@@ -40,7 +40,8 @@ class MainActivity() : AppCompatActivity() {
         //loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         buttonIngresar.setOnClickListener(::login)
-        TextForget.setOnClickListener(::resetPass);
+        TextForget.setOnClickListener(::resetPass)
+        getAllUsers()
 
         checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){
@@ -64,6 +65,18 @@ class MainActivity() : AppCompatActivity() {
         this.startActivity(myIntent)
 
 
+    }
+
+    fun  getAllUsers() {
+        loginViewModel.allUserList.observe(this) { users ->
+            users.let {
+                if (it.isNotEmpty()) {
+
+                } else {
+
+                }
+            }
+        }
     }
 
     fun login(p: View?) {

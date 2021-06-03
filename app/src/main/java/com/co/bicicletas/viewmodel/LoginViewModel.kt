@@ -1,11 +1,10 @@
 package com.co.bicicletas.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.co.bicicletas.model.database.LoginRepository
 import com.co.bicicletas.model.entities.BodyLoginResponse
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.database.LoginDatabase
 import com.co.bicicletas.model.network.BackendApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -30,6 +29,7 @@ class LoginViewModel (private val repository: LoginRepository): ViewModel() {
     val loginResponse = MutableLiveData<BodyLoginResponse.LoginResponseDTO>()
     val randomDishLoadingError = MutableLiveData<Boolean>()
 
+    val allUserList: LiveData<List<LoginDatabase>> = repository.getAllUser().asLiveData()
 
     fun getLogin( body : LoginDTO) {
         // Define the value of the load random dish.
