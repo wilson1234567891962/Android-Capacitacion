@@ -27,9 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.frogotPass"
+        <activity android:name=".view.activities.forgetPass"
             android:theme="@style/Theme.Bicicletas.NoActionBar"></activity>
-        <activity android:name=".view.activities.LoginActivity"
+        <activity android:name=".view.activities.MainActivity"
             android:theme="@style/Theme.Bicicletas.NoActionBar"></activity>
     </application>
 

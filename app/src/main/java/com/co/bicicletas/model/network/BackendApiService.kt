@@ -1,7 +1,9 @@
 package com.co.bicicletas.model.network
 
 import com.co.bicicletas.model.entities.BodyLoginResponse
+import com.co.bicicletas.model.entities.BodyPassResponse
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.PassDTO
 import com.co.bicicletas.utils.Constants
 import io.reactivex.rxjava3.core.Single
 import okhttp3.OkHttpClient
@@ -37,7 +39,7 @@ class BackendApiService {
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .build() // Create the Retrofit instance using the configured values.
         // Create an implementation of the API endpoints defined by the service interface in our case it is RandomDishAPI.
-        .create(BicicletasApis::class.java)
+        .create(BicicletasAPI::class.java)
 
     private fun generateOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
@@ -55,6 +57,11 @@ class BackendApiService {
          Single<BodyLoginResponse.LoginResponseDTO> {
         return api.login(bodyLogin)
     }
+
+    fun doResetPass(bodyPass: PassDTO): Single<BodyPassResponse> {
+        return api.pass(bodyPass)
+    }
+
 
 
 }

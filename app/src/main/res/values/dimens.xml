@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="_10sdp">10.00dp</dimen>
     <dimen name="_50sdp">50.00dp</dimen>
     <dimen name="_16sdp">16.00dp</dimen>
     <dimen name = "default_padding">16dp</dimen>
-
     <!--  ProgressBar -->
     <dimen name="progress_horizontal_height">4dp</dimen>
     <dimen name="progress_horizontal_background_height">2dp</dimen>
     <dimen name="progress_circular_height">6dp</dimen>
     <dimen name="progress_circular_background_height">2dp</dimen>
+
 
     <dimen name="_5sdp">5.00dp</dimen>
     <dimen name="_120sdp">120.00dp</dimen>

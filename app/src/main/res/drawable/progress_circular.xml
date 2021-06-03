@@ -38,7 +38,7 @@
                 android:thickness="@dimen/progress_circular_height"
                 android:thicknessRatio="100"
                 android:useLevel="true">
-                <solid android:color="@color/branco" />
+                <solid android:color="@color/white" />
             </shape>
         </rotate>
     </item>

@@ -2,6 +2,8 @@ package com.co.bicicletas.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.model.database.LoginRepository
 import com.co.bicicletas.model.entities.BodyLoginResponse
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.model.network.BackendApiService
@@ -10,7 +12,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel (private val repository: LoginRepository): ViewModel() {
 
     private val backendApiService = BackendApiService()
 
@@ -73,4 +75,16 @@ class LoginViewModel : ViewModel() {
         )
     }
 
+}
+
+
+class LoginViewModelFactory(private val repository: LoginRepository) :
+    ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return LoginViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }

@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Bicicletas</string>
-
     <string name="splash_screen_title">Bicicletas</string>
-    <string name="title_home">Album</string>
-    <string name="title_collector">Coleccionista</string>
-    <string name="title_artist">Artista</string>
+    <string name="title_home">Albumes</string>
+    <string name="title_collector">Coleccionistas</string>
+    <string name="title_artist">Artistas</string>
+    <string name="title_search">Buscador</string>
 
-    <string name="image_contentDescription">image</string>
-    <string name="label_album_added_yet">No hya albums!!!</string>
+    <string name="image_contentDescription">Buscador</string>
+
+    <string name="label_album_added_yet">No hay albumes</string>
 </resources>
