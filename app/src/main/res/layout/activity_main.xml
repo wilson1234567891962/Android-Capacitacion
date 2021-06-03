@@ -66,6 +66,13 @@
             android:singleLine="true"
             android:textColor="@color/blue" />
 
+        <CheckBox
+            android:id="@+id/checkData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recordar"
+            />
+
         <Button
             android:id="@+id/ingresar"
             android:layout_width="wrap_content"
