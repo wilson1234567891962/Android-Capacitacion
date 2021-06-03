@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.application.BicicletasApplications
 import com.co.bicicletas.view.activities.R
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.database.Login
 import com.co.bicicletas.utils.extensiones.hideLoader
 import com.co.bicicletas.utils.extensiones.showLoader
 import com.co.bicicletas.viewModel.LoginViewModel
@@ -23,8 +24,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var etPass : EditText
     lateinit var forgotP : TextView
     lateinit var login : Button
-    lateinit var loginVM: LoginViewModel
+
     lateinit var checkBox: CheckBox
+    var loginDatabase = Login(-1,"","", false)
+
 
     private val loginViewModel: LoginViewModel by viewModels {
         LoginViewModelFactory((this.application as BicicletasApplications).repository)
@@ -46,18 +49,7 @@ class MainActivity : AppCompatActivity() {
         forgotP.setOnClickListener(::reset)
 
         login.setOnClickListener(::login)
-
-        loginVM=ViewModelProvider(this).get(LoginViewModel::class.java)
-
-        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-                if(isChecked){
-                    Toast.makeText(this,"Activado",Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(this,"Desactivado",Toast.LENGTH_LONG).show()
-                }
-        }
-
-
+        this.getUserById()
         }
 
 
@@ -73,12 +65,12 @@ class MainActivity : AppCompatActivity() {
     fun login(p:View){
         //Toast.makeText(this,"Usuario: ${etUser.text} \n Contraseña: ${etPass.text}",Toast.LENGTH_LONG).show()
         this.showLoader()
-        loginVM.getLogin(LoginDTO(password =etPass.text.toString() ,user = etUser.text.toString()))
+        loginViewModel.getLogin(LoginDTO(password =etPass.text.toString() ,user = etUser.text.toString()))
         getViewModelObserver()
     }
 
     fun getViewModelObserver(){
-        loginVM.loginResponse.observe(this){
+        loginViewModel.loginResponse.observe(this){
         login -> login.let {
             Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
             this.hideLoader()
@@ -86,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(myIntent)
         }
 }
-
   /*      loginVM.loadRandomDish.observe(this, Observer { loader ->
             loader?.let {
                 // Show the progress dialog if the SwipeRefreshLayout is not visible and hide when the usage is completed.
@@ -98,6 +89,47 @@ class MainActivity : AppCompatActivity() {
             }
         })
 */
+    }
+
+
+    fun getUserById(){
+        loginViewModel.getUserById.observe(this){login ->
+            login.let{
+                if(login.isNotEmpty()){
+                    val userFilter=login.first()
+                    checkBox.isChecked = userFilter.state
+                    if(userFilter.state) {
+                        (this.etUser as TextView).text = userFilter.mail
+                        (this.etPass as TextView).text = userFilter.passw
+                    }
+                    this.loginDatabase = userFilter
+
+                }
+                this.checkBoxListener()
+            }
+
+        }
+    }
+    fun checkBoxListener(){
+        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            this.insertUserWhenHeChecksTheCheckBox(isChecked)
+        }
+    }
+
+    private fun insertUserWhenHeChecksTheCheckBox(state: Boolean) {
+        if(loginDatabase.id !== -1) {
+            loginDatabase.passw = etPass.text.toString()
+            loginDatabase.mail = etUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.updateUser(loginDatabase)
+        } else {
+            loginDatabase.state = state
+            loginDatabase.mail = etUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.insertUser(loginDatabase)
+        }
     }
 
 }

@@ -16,5 +16,7 @@ interface LoginDao {
     @Delete
     suspend fun deletetUser(login: Login)
 
+    @Query("select * from login_table WHERE id = 1")
+    fun getUserbyId(): Flow<List<Login>>
 
 }

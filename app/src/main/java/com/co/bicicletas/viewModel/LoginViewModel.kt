@@ -1,16 +1,16 @@
 package com.co.bicicletas.viewModel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.co.bicicletas.model.database.LoginRepository
 import com.co.bicicletas.model.entities.BodyResponse
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.database.Login
 import com.co.bicicletas.model.network.networkApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: LoginRepository): ViewModel() {
     private val backendApiService = networkApiService()
@@ -27,6 +27,8 @@ class LoginViewModel(private val repository: LoginRepository): ViewModel() {
     val loadRandomDish = MutableLiveData<Boolean>()
     val loginResponse = MutableLiveData<BodyResponse.LoginResponseDTO>()
     val randomDishLoadingError = MutableLiveData<Boolean>()
+
+    val getUserById: LiveData<List<Login>> = repository.getUserbyId().asLiveData()
 
     fun getLogin(body:LoginDTO) {
         // Define the value of the load random dish.
@@ -70,6 +72,19 @@ class LoginViewModel(private val repository: LoginRepository): ViewModel() {
                 })
         )
     }
+
+    /**
+     * Launching a new coroutine to insert the data in a non-blocking way.
+     */
+    fun insertUser(user: Login) = viewModelScope.launch {
+        // Call the repository function and pass the details.
+        repository.insertUser(user)
+    }
+    fun updateUser(user: Login) = viewModelScope.launch {
+        // Call the repository function and pass the details.
+        repository.updateUser(user)
+    }
+
 
 }
 class LoginViewModelFactory(private val repository: LoginRepository) :

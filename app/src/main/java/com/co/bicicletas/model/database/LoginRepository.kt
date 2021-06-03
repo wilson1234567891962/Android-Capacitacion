@@ -25,5 +25,9 @@ class LoginRepository(
         LoginDao.deletetUser(login)
     }
 
+    fun getUserbyId(): Flow<List<Login>> {
+        return LoginDao.getUserbyId()
+    }
+
 
 }

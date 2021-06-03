@@ -8,4 +8,4 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(tableName = "login_table")
-data class Login(@PrimaryKey(autoGenerate = true) val id: Int = 0,@ColumnInfo val mail:String,@ColumnInfo val passw :String,@ColumnInfo val state:Boolean) : Parcelable
+data class Login(@PrimaryKey(autoGenerate = true) var id: Int = 0, @ColumnInfo var mail:String, @ColumnInfo var passw :String, @ColumnInfo var state:Boolean) : Parcelable
