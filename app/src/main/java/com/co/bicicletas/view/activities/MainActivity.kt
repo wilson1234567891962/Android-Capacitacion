@@ -4,16 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.viewmodel.LoginViewModel
+import com.co.bicicletas.viewmodel.LoginViewModelFactory
+import com.co.bicicletas.application.BcicletasApplications
 import hideLoader
 import showLoader
 
@@ -23,8 +23,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pass:EditText
     private lateinit var olvidoC:TextView
     private lateinit var buttonAcc: Button
+    private lateinit var keepCheckBox : CheckBox
 
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory((this.application as
+                BcicletasApplications).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -35,13 +39,28 @@ class MainActivity : AppCompatActivity() {
         pass = findViewById<EditText>(R.id.editText)
         olvidoC = findViewById<TextView>(R.id.textView3)
         buttonAcc = findViewById<Button>(R.id.button1)
+        keepCheckBox = findViewById<CheckBox>(R.id.keepcb)
 
         buttonAcc.setOnClickListener(::login)
 
-        loginViewModel=
-            ViewModelProvider(this).get(LoginViewModel::class.java)
+        olvidoC.setOnClickListener(::resetPass)
 
-        olvidoC.setOnClickListener(::resetPass);
+        keepCheckBox.setOnCheckedChangeListener{buttonView, isChecked ->
+            if (isChecked)
+            {
+                Toast.makeText(applicationContext, "Check Habilitado" as String,
+                    Toast.LENGTH_LONG)
+
+            }
+            else
+            {
+                Toast.makeText(applicationContext, "Check DesHabilitado" as String,
+                    Toast.LENGTH_LONG)
+            }
+
+        }
+
+
 
 
     }
@@ -114,6 +133,7 @@ private fun resetPass(p : View? ) {
             }
         })*/
     }
+
 
 
 

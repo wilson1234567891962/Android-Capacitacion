@@ -7,14 +7,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.MainActivity" >
+    tools:context=".view.activities.MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.activities.MainActivity"
+        android:orientation="vertical"
 
 
-        android:orientation="vertical">
+        tools:context=".view.activities.MainActivity">
 
         <ImageView
             android:id="@+id/image1"
@@ -62,52 +63,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contraseña"
-            android:textColor="#000000"
-            />
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            >
+            android:layout_marginStart="30dp">
 
 
         </EditText>
 
 
-
-
-
+        <CheckBox
+            android:id="@+id/keepcb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/keepcb"></CheckBox>
 
 
         <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="100dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="100dp"
             android:background="#3F51B5"
             android:text="Ingresar"
-            app:rippleColor="#2C3E9F"
-            android:layout_gravity="center">
-
+            app:rippleColor="#2C3E9F">
 
 
         </Button>
-
 
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:longClickable="true"
             android:text="Olvido la contraseña ?"
-            android:textColor="#000000"
-            android:layout_gravity="center"
-            />
+            android:textColor="#000000" />
     </LinearLayout>
 </ScrollView>
 
