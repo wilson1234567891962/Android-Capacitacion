@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/scrollView">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,70 +12,72 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:src="@drawable/Captura"/>
-
-        <LinearLayout
-            android:id="@+id/usernameLayout"
-            android:layout_width="match_parent"
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/bus" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Usuario"
-                android:layout_marginTop="5dp"/>
+        <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp" android:layout_gravity="center_horizontal"
+        android:text="Control de Rutas"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"/>
-        </LinearLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/holo_red_light"
+        android:text="Usuario o Contraseña Incorrecta"/>
 
-        <LinearLayout
-            android:id="@+id/passwordLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <EditText
+        android:id="@+id/etUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="18dp"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Contraseña:"
-                android:layout_marginTop="5dp"/>
+        android:text="User" />
 
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"/>
-        </LinearLayout>
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Pass"
+        android:layout_below="@+id/etUser"
+        />
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recordar Usuario"/>
 
-        <LinearLayout
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <Button
+        android:id="@+id/boton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Iniciar Sesion"
+        android:layout_below="@+id/etPass"
+        />
 
-            <Button
-                android:id="@+id/enviar"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="12dp"
-                android:text="Enviar" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="5dp"
-                android:text="¿Olvidó la contraseña?" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/boton"
+        android:layout_marginTop="29dp"
+        android:layout_gravity="center_horizontal"
+        android:text="¿Olvido su contraseña?" />
 
     </LinearLayout>
 

@@ -12,5 +12,26 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- ProgressBar -->
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBar.Horizontal</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Circular</item>
     </style>
+
+    <style name="Theme.Bicicletas.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme" parent="Theme.Bicicletas" />
+    <style name="Loader" parent="@style/AppTheme">
+        <item name="android:windowFrame">@android:color/transparent</item>
+        <item name="android:windowBackground">@drawable/loader_background</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentOverlay">@android:color/transparent</item>
+        <item name="android:windowNoTitle">false</item>
+        <item name="colorPrimary">@color/white</item>
+    </style>
+    <style name="Theme.Bicicletas.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Bicicletas.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
