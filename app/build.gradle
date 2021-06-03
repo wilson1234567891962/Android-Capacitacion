@@ -74,4 +74,10 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
+
+    // Room components
+// Reference Link: https://developer.android.com/training/data-storage/room
+    def room_version = '2.2.6'
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }

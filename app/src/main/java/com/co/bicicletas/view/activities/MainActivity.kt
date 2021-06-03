@@ -3,11 +3,9 @@ package com.co.bicicletas.view.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.view.activities.R
 import com.co.bicicletas.model.entities.LoginDTO
@@ -23,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var forgotP : TextView
     lateinit var login : Button
     lateinit var loginVM: LoginViewModel
+    lateinit var checkBox: CheckBox
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,18 +35,27 @@ class MainActivity : AppCompatActivity() {
 
         login=findViewById(R.id.boton) as Button
 
+        checkBox= findViewById(R.id.checkBox)
+
         forgotP.setOnClickListener(::reset)
 
-        login.setOnClickListener(::showData)
+        login.setOnClickListener(::login)
 
-        loginVM=
-            ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginVM=ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked){
+                    Toast.makeText(this,"Activado",Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(this,"Desactivado",Toast.LENGTH_LONG).show()
+                }
+        }
+
 
         }
 
-    fun login(p: View){
 
-    }
+
 
     fun reset(p: View){
         val myIntent = Intent(this, forgotPass::class.java)
@@ -56,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         this.startActivity(myIntent)
     }
 
-    fun showData(p:View){
+    fun login(p:View){
         //Toast.makeText(this,"Usuario: ${etUser.text} \n Contraseña: ${etPass.text}",Toast.LENGTH_LONG).show()
         this.showLoader()
         loginVM.getLogin(LoginDTO(password =etPass.text.toString() ,user = etUser.text.toString()))
@@ -68,8 +76,22 @@ class MainActivity : AppCompatActivity() {
         login -> login.let {
             Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
             this.hideLoader()
+            val myIntent = Intent(this, HomeActivity::class.java)
+            this.startActivity(myIntent)
         }
 }
 
+  /*      loginVM.loadRandomDish.observe(this, Observer { loader ->
+            loader?.let {
+                // Show the progress dialog if the SwipeRefreshLayout is not visible and hide when the usage is completed.
+                if (loader) {
+                    this.showLoader()
+                } else {
+                    this.hideLoader()
+                }
+            }
+        })
+*/
     }
+
 }

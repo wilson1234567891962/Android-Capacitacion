@@ -3,4 +3,9 @@
     <string name="title_activity_forgot_pass">forgotPass</string>
     <string name="splash_screen_title">Biclicletas</string>
 
+    <string name="album">Albumes</string>
+    <string name="collection">Coleccionistas</string>
+    <string name="artist">Artistas</string>
+    <string name="search">Buscador</string>
+
 </resources>
