@@ -29,9 +29,8 @@ class LoginRepository (
 
     }
 
-//    @WorkerThread
-//    suspend fun getAllUsers() : Flow<List<Login>>{
-//        return loginDAO.getAllUsers()
-//    }
+    fun getUserById() : Flow<List<Login>>{
+        return loginDAO.getUserById()
+    }
 
 }

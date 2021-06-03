@@ -6,10 +6,9 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.application.BicicletasApplications
-import com.co.bicicletas.view.activities.R
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.database.Login
 import com.co.bicicletas.utils.extensiones.hideLoader
 import com.co.bicicletas.utils.extensiones.showLoader
 import com.co.bicicletas.viewModel.LoginViewModel
@@ -18,14 +17,16 @@ import com.co.bicicletas.viewModel.LoginViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var etUser : EditText
-    lateinit var etPass : EditText
+    lateinit var textUser : EditText
+    lateinit var textPass : EditText
     lateinit var forgotP : TextView
     lateinit var login : Button
 //    lateinit var loginVM: LoginViewModel
     lateinit var checkbox : CheckBox
 
-    private val loginVM: LoginViewModel by viewModels {
+    var loginDatabase = Login(-1,"","", false)
+
+    private val loginViewModel: LoginViewModel by viewModels {
         LoginViewModelFactory((this.application as BicicletasApplications).repository)
     }
 
@@ -33,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        etUser=findViewById(R.id.etUser) as EditText
-        etPass=findViewById(R.id.etPass) as EditText
+        textUser=findViewById(R.id.etUser) as EditText
+        textPass=findViewById(R.id.etPass) as EditText
 
         forgotP=findViewById(R.id.textView3) as TextView
 
@@ -46,45 +47,80 @@ class MainActivity : AppCompatActivity() {
 
         login.setOnClickListener(::showData)
 
-        checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                Toast.makeText(applicationContext, "CUalquier", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(applicationContext, "Otro mensaje", Toast.LENGTH_SHORT).show()
+        this.getUserById()
+//        loginVM = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-            }
-        }
-
-        loginVM=
-            ViewModelProvider(this).get(LoginViewModel::class.java)
-
-        }
+    }
 
     fun login(p: View){
 
     }
 
-    fun reset(p: View){
+    fun reset (p: View){
         val myIntent = Intent(this, forgotPass::class.java)
         myIntent.putExtra("key", "HOla") //Optional parameters
 
         this.startActivity(myIntent)
     }
 
-    fun showData(p:View){
+    fun showData (p:View){
         //Toast.makeText(this,"Usuario: ${etUser.text} \n Contraseña: ${etPass.text}",Toast.LENGTH_LONG).show()
         this.showLoader()
-        loginVM.getLogin(LoginDTO(password =etPass.text.toString() ,user = etUser.text.toString()))
+        loginViewModel.getLogin(LoginDTO(password =textPass.text.toString() ,user = textUser.text.toString()))
         getViewModelObserver()
     }
 
-    fun getViewModelObserver(){
-        loginVM.loginResponse.observe(this){
-        login -> login.let {
-            Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
-            this.hideLoader()
+    fun getViewModelObserver() {
+        loginViewModel.loginResponse.observe(this) { login ->
+            login.let {
+                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+                this.hideLoader()
+            }
         }
-}
+    }
 
+    fun getUserById(){
+        loginViewModel.getUserById.observe(this) { login ->
+            login.let {
+                if (login.isNotEmpty()){
+                    var userFilter = login.first()
+
+                    checkbox.isChecked = userFilter.state
+                    if(userFilter.state) {
+                        (this.textUser as TextView).text = userFilter.email
+                        (this.textPass as TextView).text = userFilter.password
+                    }
+                    this.loginDatabase = userFilter
+                }
+                this.checkBoxListener()
+            }
+        }
+    }
+
+    private fun insertUserWhenHeChecksTheCheckBox(state: Boolean) {
+        if(loginDatabase.id !== -1) {
+            loginDatabase.password = textPass.text.toString()
+            loginDatabase.email = textUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.updateUser(loginDatabase)
+        } else {
+            loginDatabase.state = state
+            loginDatabase.email = textUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.insertUser(loginDatabase)
+        }
+    }
+
+    fun checkBoxListener() {
+        checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            insertUserWhenHeChecksTheCheckBox(isChecked)
+//            if(isChecked){
+//                Toast.makeText(applicationContext, "Recordar usuario", Toast.LENGTH_SHORT).show()
+//            }else{
+//                Toast.makeText(applicationContext, "No recordar", Toast.LENGTH_SHORT).show()
+//            }
+        }
     }
 }
