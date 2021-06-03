@@ -23,9 +23,7 @@ class LoginRepository(
         loginDAO.deleteUser(login)
     }
 
-//    @WorkerThread
-//    suspend fun getAllUsers() : Flow<List<LoginDatabase>>{
-//        return loginDAO.getAllUsers()
-//    }
-
+    fun getUserById() : Flow<List<LoginDatabase>>{
+        return loginDAO.getUserById()
+    }
 }

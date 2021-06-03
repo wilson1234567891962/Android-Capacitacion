@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.aplication.bicicletas.BicicletasApplication
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.database.LoginDatabase
 import com.co.bicicletas.utils.extensions.hideLoader
 import com.co.bicicletas.utils.extensions.showLoader
 import com.co.bicicletas.viewmodel.LoginViewModel
@@ -23,6 +24,8 @@ class MainActivity() : AppCompatActivity() {
     lateinit var buttonIngresar:Button
     lateinit var TextForget:TextView
     lateinit var checkboxEvt:CheckBox
+
+    var loginDatabase = LoginDatabase(-1,"","", false)
 
     private val loginViewModel: LoginViewModel by viewModels {
         LoginViewModelFactory((this.application as BicicletasApplication).repository)
@@ -39,20 +42,7 @@ class MainActivity() : AppCompatActivity() {
 
         buttonIngresar.setOnClickListener(::login)
         TextForget.setOnClickListener(::resetPass);
-        checkboxEvt.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked){
-                Toast.makeText(
-                    this, "Recordar" as String?,
-                    Toast.LENGTH_LONG
-                ).show()
-            }else{
-                Toast.makeText(
-                    this, "No Recordar" as String?,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-
+        this.getUserById()
     }
 
     fun resetPass(p: View?) {
@@ -94,6 +84,48 @@ fun login(p: View?){
 //        })
    }
 
+    fun getUserById(){
+        loginViewModel.getUserById.observe(this) { login ->
+            login.let {
+                if (login.isNotEmpty()){
+                    val userFilter = login.first()
+
+                    checkboxEvt.isChecked = userFilter.state
+                    if(userFilter.state) {
+                        (this.textUser as TextView).text = userFilter.email
+                        (this.textPass as TextView).text = userFilter.password
+                    }
+
+                    this.loginDatabase = userFilter
+                }
+
+
+                this.checkBoxListener()
+            }
+        }
+    }
+
+    fun insertUserWhenHeChecksTheCheckBox(state: Boolean) {
+        if(loginDatabase.id !== -1) {
+            loginDatabase.password = textPass.text.toString()
+            loginDatabase.email = textUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.updateUser(loginDatabase)
+        } else {
+            loginDatabase.state = state
+            loginDatabase.email = textUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.insertUser(loginDatabase)
+        }
+    }
+
+    fun checkBoxListener(){
+        checkboxEvt.setOnCheckedChangeListener { buttonView, isChecked ->
+            insertUserWhenHeChecksTheCheckBox(isChecked)
+        }
+    }
 }
 
 
