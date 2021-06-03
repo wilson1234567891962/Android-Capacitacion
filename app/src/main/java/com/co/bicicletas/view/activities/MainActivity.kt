@@ -4,13 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.co.bicicletas.application.BicicletasApplications
 import com.co.bicicletas.view.activities.R
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.utils.extensiones.hideLoader
 import com.co.bicicletas.utils.extensiones.showLoader
 import com.co.bicicletas.viewModel.LoginViewModel
+import com.co.bicicletas.viewModel.LoginViewModelFactory
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,9 +22,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var etPass : EditText
     lateinit var forgotP : TextView
     lateinit var login : Button
-    lateinit var loginVM: LoginViewModel
+//    lateinit var loginVM: LoginViewModel
     lateinit var checkbox : CheckBox
 
+    private val loginVM: LoginViewModel by viewModels {
+        LoginViewModelFactory((this.application as BicicletasApplications).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
