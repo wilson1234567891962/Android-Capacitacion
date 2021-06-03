@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.aplication.bicicletas.BicicletasApplication
 import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.database.LoginDatabase
 import com.co.bicicletas.utils.extensions.hideLoader
 import com.co.bicicletas.utils.extensions.showLoader
 import com.co.bicicletas.viewmodel.LoginViewModel
@@ -22,6 +22,7 @@ class MainActivity() : AppCompatActivity() {
     lateinit var buttonIngresar: Button
     lateinit var TextForget: TextView
     lateinit var checkBox: CheckBox
+    var loginDatabase = LoginDatabase(-1,"","", false)
     // private lateinit var loginViewModel: LoginViewModel
 
     private val loginViewModel: LoginViewModel by viewModels {
@@ -43,39 +44,52 @@ class MainActivity() : AppCompatActivity() {
         TextForget.setOnClickListener(::resetPass)
         getAllUsers()
 
-        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                Toast.makeText(
-                    this, "Habilitado" as String?,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else{
-                Toast.makeText(
-                    this, "Deshabilitado" as String?,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
 
     }
 
-    fun resetPass(p: View?) {
+    private fun insertUserWhenHeChecksTheCheckBox(state: Boolean) {
+        if(loginDatabase.id !== -1) {
+            loginDatabase.pass = textPass.text.toString()
+            loginDatabase.mail = textUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.updateUser(loginDatabase)
+        } else {
+            loginDatabase.state = state
+            loginDatabase.mail = textUser.text.toString()
+            loginDatabase.state = state
+            loginDatabase.id = 1
+            loginViewModel.insertUser(loginDatabase)
+        }
+    }
+
+    private fun resetPass(p: View?) {
         val myIntent = Intent(this, forgetPass::class.java)
         this.startActivity(myIntent)
 
 
     }
 
-    fun  getAllUsers() {
+    private fun  getAllUsers() {
         loginViewModel.allUserList.observe(this) { users ->
             users.let {
                 if (it.isNotEmpty()) {
-
-                } else {
-
+                    val userFilter = it.first()
+                    checkBox.isChecked = userFilter.state
+                    if(userFilter.state) {
+                        (this.textUser as TextView).text = userFilter.mail
+                        (this.textPass as TextView).text = userFilter.pass
+                    }
+                    this.loginDatabase = userFilter
                 }
+                checkListener()
             }
+        }
+    }
+
+    private fun checkListener() {
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            insertUserWhenHeChecksTheCheckBox(isChecked)
         }
     }
 

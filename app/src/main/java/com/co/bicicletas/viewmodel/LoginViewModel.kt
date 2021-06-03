@@ -10,6 +10,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
 class LoginViewModel (private val repository: LoginRepository): ViewModel() {
 
@@ -30,6 +31,20 @@ class LoginViewModel (private val repository: LoginRepository): ViewModel() {
     val randomDishLoadingError = MutableLiveData<Boolean>()
 
     val allUserList: LiveData<List<LoginDatabase>> = repository.getAllUser().asLiveData()
+
+
+    /**
+     * Launching a new coroutine to insert the data in a non-blocking way.
+     */
+    fun insertUser(user: LoginDatabase) = viewModelScope.launch {
+        // Call the repository function and pass the details.
+        repository.insertUser(user)
+    }
+
+    fun updateUser(user: LoginDatabase) = viewModelScope.launch {
+        // Call the repository function and pass the details.
+        repository.updateUser(user)
+    }
 
     fun getLogin( body : LoginDTO) {
         // Define the value of the load random dish.
