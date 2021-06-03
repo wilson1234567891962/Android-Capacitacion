@@ -13,6 +13,7 @@ import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.utils.extensions.hideLoader
 import com.co.bicicletas.utils.extensions.showLoader
 import com.co.bicicletas.viewmodel.LoginViewModel
+import com.co.bicicletas.viewmodel.LoginViewModelFactory
 
 
 class MainActivity() : AppCompatActivity() {
@@ -24,7 +25,7 @@ class MainActivity() : AppCompatActivity() {
    // private lateinit var loginViewModel: LoginViewModel
 
     private val loginViewModel: LoginViewModel by viewModels {
-        LoginViewModel.LoginViewModelFactory((this.application as BicicletasApplication).Repository)
+        LoginViewModelFactory((this.application as BicicletasApplication).Repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
