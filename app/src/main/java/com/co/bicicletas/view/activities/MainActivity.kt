@@ -3,10 +3,7 @@ package com.co.bicicletas.view.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
@@ -17,27 +14,42 @@ import com.co.bicicletas.viewmodel.LoginViewModel
 
 
 class MainActivity() : AppCompatActivity() {
-    lateinit var textUser:EditText
-    lateinit var textPass:EditText
-    lateinit var buttonIngresar:Button
-    lateinit var TextForget:TextView
-
-    private lateinit var loginViewModel:LoginViewModel
+    lateinit var textUser: EditText
+    lateinit var textPass: EditText
+    lateinit var buttonIngresar: Button
+    lateinit var TextForget: TextView
+    lateinit var checkBox: CheckBox
+    private lateinit var loginViewModel: LoginViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-         textUser = findViewById(R.id.user) as EditText
-         textPass = findViewById(R.id.password) as EditText
-         buttonIngresar = findViewById(R.id.ingresar) as Button
-         TextForget= findViewById(R.id.forget) as TextView
+        textUser = findViewById(R.id.user) as EditText
+        textPass = findViewById(R.id.password) as EditText
+        buttonIngresar = findViewById(R.id.ingresar) as Button
+        TextForget = findViewById(R.id.forget) as TextView
+        checkBox = findViewById(R.id.recordar) as CheckBox
 
-        loginViewModel=ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         buttonIngresar.setOnClickListener(::login)
         TextForget.setOnClickListener(::resetPass);
 
+        checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+        if(isChecked){
+            Toast.makeText(
+                this, "Habilitado" as String?,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+            else{
+            Toast.makeText(
+                this, "Deshabilitado" as String?,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        }
 
     }
 
@@ -48,18 +60,19 @@ class MainActivity() : AppCompatActivity() {
 
     }
 
-fun login(p: View?){
-   /* Toast.makeText(
-        this, "${textUser.text} ${textPass.text}" as String?,
+    fun login(p: View?) {
+        /* Toast.makeText(
+             this, "${textUser.text} ${textPass.text}" as String?,
 
-        Toast.LENGTH_LONG
-    ).show()*/
-    this.showLoader()
-    loginViewModel.getLogin(LoginDTO(textPass.text.toString(),textUser.text.toString()))
-    ViewModelObserver()
+             Toast.LENGTH_LONG
+         ).show()*/
+        this.showLoader()
+        loginViewModel.getLogin(LoginDTO(textPass.text.toString(), textUser.text.toString()))
+        ViewModelObserver()
 
-}
-    fun ViewModelObserver(){
+    }
+
+    fun ViewModelObserver() {
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
                 //Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
@@ -70,8 +83,6 @@ fun login(p: View?){
         }
 
     }
-
-
 
 
 }
