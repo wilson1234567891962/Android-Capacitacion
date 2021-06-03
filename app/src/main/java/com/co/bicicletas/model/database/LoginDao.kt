@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
         suspend fun deleteUser(login:Login)
 
         //devuleve un array
-//        @Query("SELECT  * FROM login_table")
-//        suspend fun getUsers() : Flow<List<Login>>
+        @Query("SELECT  * FROM login_table where id = 1")
+         fun getUserById() : Flow<List<Login>>
 
 }

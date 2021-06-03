@@ -33,12 +33,12 @@ class LoginRepository (private val loginDAO : LoginDao){
 
     }
 
-//    @WorkerThread
-//    suspend fun getUser(login:Login) : Flow<List<Login>>{
-//        val state : Flow<Boolean>
-//
-//        return loginDAO.getUsers();
-//
-//    }
+
+     fun getUserById() : Flow<List<Login>>{
+        val state : Flow<Boolean>
+
+        return loginDAO.getUserById();
+
+    }
 
 }
