@@ -4,11 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
 import com.co.bicicletas.model.entities.LoginDTO
@@ -22,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pass:EditText
     private lateinit var olvidoC:TextView
     private lateinit var buttonAcc: Button
+    private lateinit var checkboxUser: CheckBox
+
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         pass = findViewById<EditText>(R.id.editText)
         olvidoC = findViewById<TextView>(R.id.textView3)
         buttonAcc = findViewById<Button>(R.id.button1)
+        checkboxUser= findViewById<CheckBox>(R.id.checkboxLogin)
 
         buttonAcc.setOnClickListener(::login)
 
@@ -41,7 +42,14 @@ class MainActivity : AppCompatActivity() {
             ViewModelProvider(this).get(LoginViewModel::class.java)
 
         olvidoC.setOnClickListener(::resetPass);
+        checkboxUser.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                Toast.makeText(applicationContext, "habilitado", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(applicationContext, "Deshabilitado", Toast.LENGTH_SHORT).show()
+            }
 
+        }
 
     }
 
@@ -90,16 +98,33 @@ private fun resetPass(p : View? ) {
 
     }
 
-    fun getViewModelObserver(){
+    fun getViewModelObserver() {
 
         loginViewModel.loginResponse.observe(this) { login ->
             login.let {
                 //Log.d("login","A2")
-                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(applicationContext, it.data.token, Toast.LENGTH_SHORT).show()
                 this.hideLoader()
+                val myIntent = Intent(this, HomeActivity::class.java)
+                this.startActivity(myIntent)
             }
         }
-            }
+
+//
+//        loginViewModel.loadRandomDish.observe(this, Observer { loader ->
+//            loader?.let {
+//                // Show the progress dialog if the SwipeRefreshLayout is not visible and hide when the usage is completed.
+//                if (loader) {
+//                    this.showLoader()
+//                } else {
+//                    this.hideLoader()
+//                }
+//            }
+//        })
+//            }
 
 
+
+
+    }
 }

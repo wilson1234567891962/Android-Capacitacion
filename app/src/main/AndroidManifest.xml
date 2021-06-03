@@ -13,9 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bicicletas"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.activities.SplashActivity"
-            android:theme="@style/Theme.Bicicletas.NoActionBar"
-            >
+        <activity android:name=".view.activities.HomeActivity"></activity>
+        <activity
+            android:name=".view.activities.SplashActivity"
+            android:theme="@style/Theme.Bicicletas.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.frogotPass" />
-        <activity android:name=".view.activities.MainActivity">
-
-        </activity>
+        <activity android:name=".view.activities.MainActivity"></activity>
     </application>
 
 </manifest>

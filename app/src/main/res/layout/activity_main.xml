@@ -79,7 +79,14 @@
 
 
 
+<CheckBox
+    android:id="@+id/checkboxLogin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="recuperar usuario y contraseña"
+    >
 
+</CheckBox>
 
         <Button
             android:id="@+id/button1"
@@ -91,7 +98,9 @@
             android:background="#3F51B5"
             android:text="Ingresar"
             app:rippleColor="#2C3E9F"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+
+            >
 
 
 
