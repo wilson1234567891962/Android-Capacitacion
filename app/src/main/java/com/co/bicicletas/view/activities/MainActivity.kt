@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.co.bicicletas.R
+import com.co.bicicletas.aplication.bicicletas.BicicletasApplication
 import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.utils.extensions.hideLoader
 import com.co.bicicletas.utils.extensions.showLoader
@@ -19,8 +21,11 @@ class MainActivity() : AppCompatActivity() {
     lateinit var buttonIngresar: Button
     lateinit var TextForget: TextView
     lateinit var checkBox: CheckBox
-    private lateinit var loginViewModel: LoginViewModel
+   // private lateinit var loginViewModel: LoginViewModel
 
+    private val loginViewModel: LoginViewModel by viewModels {
+        LoginViewModel.LoginViewModelFactory((this.application as BicicletasApplication).Repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +36,7 @@ class MainActivity() : AppCompatActivity() {
         TextForget = findViewById(R.id.forget) as TextView
         checkBox = findViewById(R.id.recordar) as CheckBox
 
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        //loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         buttonIngresar.setOnClickListener(::login)
         TextForget.setOnClickListener(::resetPass);
