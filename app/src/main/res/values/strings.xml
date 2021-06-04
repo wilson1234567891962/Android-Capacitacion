@@ -8,4 +8,8 @@
     <string name="artist">Artistas</string>
     <string name="search">Buscador</string>
 
+    <string name="image_contentDescription">Album</string>
+
+    <string name="label_album_added_yet">No hay albumes</string>
+
 </resources>
