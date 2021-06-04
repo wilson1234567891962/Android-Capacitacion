@@ -5,4 +5,6 @@
     <string name="title_collector">Coleccionistas</string>
     <string name="title_artist">Artistas</string>
     <string name="title_search">Buscador</string>
+    <string name="image_contentDescription">Album</string>
+    <string name="label_album_added_yet">No hay albumes</string>
 </resources>

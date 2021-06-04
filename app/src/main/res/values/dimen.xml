@@ -9,5 +9,7 @@
     <dimen name="progress_horizontal_background_height">2dp</dimen>
     <dimen name="progress_circular_height">6dp</dimen>
     <dimen name="progress_circular_background_height">2dp</dimen>
-
+    <dimen name="_5sdp">5.00dp</dimen>
+    <dimen name="_120sdp">120.00dp</dimen>
+    <dimen name="_1sdp">1.00dp</dimen>
 </resources>
