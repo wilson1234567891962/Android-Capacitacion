@@ -50,6 +50,10 @@ class BackendApiService {
         return api.forgot(bodyForgot)
     }
 
+    fun getInstanceBackend(url : String){
+
+    }
+
     private fun generateOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY

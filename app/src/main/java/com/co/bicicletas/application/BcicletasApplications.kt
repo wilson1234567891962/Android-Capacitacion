@@ -1,7 +1,6 @@
 package com.co.bicicletas.application
 
 import android.app.Application
-import com.co.bicicletas.model.database.LoginDao
 import com.co.bicicletas.model.database.LoginRepository
 import com.co.bicicletas.model.database.LoginRoomDatabase
 
