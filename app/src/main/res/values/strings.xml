@@ -6,4 +6,6 @@
     <string name="title_home">Home</string>
     <string name="title_search">Búsqueda</string>
     <string name="keepcb">Recordar</string>
+    <string name="image_contentDescription">Album</string>
+    <string name="label_album_added_yet">No hay albumes</string>
 </resources>

@@ -1,11 +1,9 @@
 package com.co.bicicletas.model.network
 
-import com.co.bicicletas.model.entities.BodyLoginResponse
-import com.co.bicicletas.model.entities.ForgotDTO
-import com.co.bicicletas.model.entities.ForgotResponseDTO
-import com.co.bicicletas.model.entities.LoginDTO
+import com.co.bicicletas.model.entities.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface BicicletasApis {
@@ -17,6 +15,9 @@ interface BicicletasApis {
 
     @POST("UMB/forgetPassword/")
     fun forgot(@Body forgotBody : ForgotDTO) : Single<ForgotResponseDTO>
+
+    @GET("albums")
+    fun getAlbums():Single<AlbumResponse>
 
 
 

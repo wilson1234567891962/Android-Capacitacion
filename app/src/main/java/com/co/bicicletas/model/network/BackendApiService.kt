@@ -16,30 +16,7 @@ import java.util.concurrent.TimeUnit
 
 class BackendApiService {
 
-    private val api = Retrofit.Builder()
-        .baseUrl(Constants.BASE_URL) // Set the API base URL.
-        // Add converter factory for serialization and deserialization of objects.
-        /**
-         * A Converter.Factory converter which uses Gson for JSON.
-         *
-         * Because Gson is so flexible in the types it supports, this converter assumes that it can handle
-         * all types.
-         */
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(generateOkHttpClient())
-        /**
-         * **
-         * Add a call adapter factory for supporting service method return types other than.
-         *
-         * A CallAdapter.Factory call adapter which uses RxJava 3 for creating observables.
-         *
-         * Adding this class to Retrofit allows you to return an Observable, Flowable, Single, Completable
-         * or Maybe from service methods.
-         */
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-        .build() // Create the Retrofit instance using the configured values.
-        // Create an implementation of the API endpoints defined by the service interface in our case it is RandomDishAPI.
-        .create(BicicletasApis::class.java)
+    
 
     fun doLogin(bodyLogin : LoginDTO ) :
          Single<BodyLoginResponse.LoginResponseDTO> {
@@ -59,6 +36,35 @@ class BackendApiService {
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .build()
+    }
+
+    fun getInstanceBackend(uri: String):BicicletasApis
+    {
+        val api = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL) // Set the API base URL.
+            // Add converter factory for serialization and deserialization of objects.
+            /**
+             * A Converter.Factory converter which uses Gson for JSON.
+             *
+             * Because Gson is so flexible in the types it supports, this converter assumes that it can handle
+             * all types.
+             */
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(generateOkHttpClient())
+            /**
+             * **
+             * Add a call adapter factory for supporting service method return types other than.
+             *
+             * A CallAdapter.Factory call adapter which uses RxJava 3 for creating observables.
+             *
+             * Adding this class to Retrofit allows you to return an Observable, Flowable, Single, Completable
+             * or Maybe from service methods.
+             */
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .build() // Create the Retrofit instance using the configured values.
+            // Create an implementation of the API endpoints defined by the service interface in our case it is RandomDishAPI.
+            .create(BicicletasApis::class.java)
+        return api
     }
 
 

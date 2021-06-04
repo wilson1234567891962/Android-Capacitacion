@@ -29,10 +29,7 @@ class LoginRepository(
 
     }
 
-   /* @WorkerThread
-    suspend fun  queryLoginData() : Flow<List<LoginDatabase>>{
-        return loginDatabase.queryLoginData()
-
-
-    }*/
+    fun getUserById(): Flow<List<LoginDatabase>>{
+        return loginDatabase.getAllUserById()
+    }
 }
