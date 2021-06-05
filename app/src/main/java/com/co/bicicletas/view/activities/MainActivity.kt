@@ -13,19 +13,19 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.work.*
 import com.co.bicicletas.R
 import com.co.bicicletas.aplication.bicicletas.BicicletasApplication
-import com.co.bicicletas.model.entities.LoginDTO
 import com.co.bicicletas.model.entities.database.LoginDatabase
-import com.co.bicicletas.utils.BigPictureStyleMockData
-import com.co.bicicletas.utils.InboxStyleMockData
-import com.co.bicicletas.utils.NotificationUtil
 import com.co.bicicletas.utils.extensions.hideLoader
-import com.co.bicicletas.utils.extensions.showLoader
 import com.co.bicicletas.viewmodel.LoginViewModel
 import com.co.bicicletas.viewmodel.LoginViewModelFactory
-
+import android.util.Log
+import android.widget.Button
+import android.widget.TextView
+import androidx.work.*
+import com.co.bicicletas.utils.*
+import java.util.concurrent.TimeUnit
 
 class MainActivity() : AppCompatActivity() {
     lateinit var textUser:EditText
@@ -75,7 +75,9 @@ fun login(p: View?){
 //    loginViewModel.getLogin(LoginDTO(textPass.text.toString(),textUser.text.toString()))
 //    ViewModelObserver()
     //generateBigPictureStyleNotification()
-    generateInboxStyleNotification()
+    //generateInboxStyleNotification()
+    //executeOnePeriod()
+    periodWorker()
 }
     fun ViewModelObserver(){
         loginViewModel.loginResponse.observe(this) { login ->
@@ -316,6 +318,128 @@ fun login(p: View?){
         mNotificationManagerCompat.notify(NOTIFICATION_ID, notification)
         // END
     }
+
+    fun executeOnePeriod(){
+        /**
+         * A specification of the requirements that need to be met before a WorkRequest can run.  By
+         * default, WorkRequests do not have any requirements and can run immediately.  By adding
+         * requirements, you can make sure that work only runs in certain situations - for example, when you
+         * have an unmetered network and are charging.
+         */
+        val oneTimeRequestConstraints = Constraints.Builder()
+            .setRequiresCharging(false)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        // Define the input data for work manager
+        // A persistable set of key/value pairs which are used as inputs and outputs for ListenableWorkers.
+        val data = Data.Builder()
+        data.putString("inputKey", "Input Value")
+        // Create an one time work request
+        /**
+         * A WorkRequest for non-repeating work.
+         * OneTimeWorkRequests can be put in simple or complex graphs of work by using methods.
+         */
+        val sampleWork = OneTimeWorkRequest
+            .Builder(OneTimeRequestWorker::class.java)
+            /**
+             * Adds input Data to the work.  If a worker has prerequisites in its chain, this
+             * Data will be merged with the outputs of the prerequisites using an InputMerger.
+             *
+             * @param inputData key/value pairs that will be provided to the worker
+             */
+            .setInputData(data.build())
+            /**
+             * Adds constraints to the WorkRequest.
+             */
+            .setConstraints(oneTimeRequestConstraints)
+            // Builds a {@link WorkRequest} based on this {@link Builder}
+            .build()
+        // Retrieves the default singleton instance of WorkManager and Enqueues one item for background processing.
+        WorkManager.getInstance(this@MainActivity).enqueue((sampleWork))
+        // Gets a LiveData of the WorkInfo for a given work id.
+        WorkManager.getInstance(this@MainActivity).getWorkInfoByIdLiveData(sampleWork.id)
+            .observe(this, Observer { workInfo ->
+                OneTimeRequestWorker.Companion.logger(workInfo.state.name)
+                if (workInfo != null) {
+                    when (workInfo.state) {
+                        WorkInfo.State.ENQUEUED -> {
+                            // Show the work state in text view
+                            TextForget.text = "Task enqueued."
+                        }
+                        WorkInfo.State.BLOCKED -> {
+                            TextForget.text = "Task blocked."
+                        }
+                        WorkInfo.State.RUNNING -> {
+                            TextForget.text = "Task running."
+                        }
+                        else -> {
+                            TextForget.text = "Task state else part."
+                        }
+                    }
+                }
+                // When work finished
+                if (workInfo != null && workInfo.state.isFinished) {
+                    when (workInfo.state) {
+                        WorkInfo.State.SUCCEEDED -> {
+                            TextForget.text = "Task successful."
+                            // Get the output data
+                            val successOutputData = workInfo.outputData
+                            val outputText = successOutputData.getString("outputKey")
+                            Log.i("Worker Output", "$outputText")
+                        }
+                        WorkInfo.State.FAILED -> {
+                            TextForget.text = "Task Failed."
+                        }
+                        WorkInfo.State.CANCELLED -> {
+                            TextForget.text = "Task cancelled."
+                        }
+                        else -> {
+                            TextForget.text = "Task state isFinished else part."
+                        }
+                    }
+                }
+            })
+    }
+
+    fun periodWorker(){
+            /**
+             * Constraints ensure that work is deferred until optimal conditions are met.
+             *
+             * A specification of the requirements that need to be met before a WorkRequest can run.
+             * By default, WorkRequests do not have any requirements and can run immediately.
+             * By adding requirements, you can make sure that work only runs in certain situations
+             * - for example, when you have an unmetered network and are charging.
+             */
+            // For more details visit the link https://medium.com/androiddevelopers/introducing-workmanager-2083bcfc4712
+            val periodicRequestConstraints = Constraints.Builder()
+                .setRequiresBatteryNotLow(false)
+                .setRequiresCharging(false)
+                .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+                .build()
+            // Create an Periodic Work Request
+            /**
+             * You can use any of the work request builder that are available to use.
+             * We will you the PeriodicWorkRequestBuilder as we want to execute the code periodically.
+             *
+             * The minimum time you can set is 15 minutes. You can check the same on the below link.
+             * https://developer.android.com/reference/androidx/work/PeriodicWorkRequest
+             *
+             * You can also set the TimeUnit as per your requirement. for example SECONDS, MINUTES, or HOURS.
+             */
+            // setting period to 15 Minutes
+            val periodicWorkRequest =
+                PeriodicWorkRequest.Builder(PeriodicRequestWorker::class.java, 15, TimeUnit.MINUTES)
+                    .setConstraints(periodicRequestConstraints)
+                    .build()
+            /* Enqueue a work, ExistingPeriodicWorkPolicy.KEEP means that if this work already exists, it will be kept
+            if the value is ExistingPeriodicWorkPolicy.REPLACE, then the work will be replaced */
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                "Periodic Work Request",
+                ExistingPeriodicWorkPolicy.KEEP,
+                periodicWorkRequest
+            )
+        }
+
 }
 
 
